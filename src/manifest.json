@@ -1,9 +1,18 @@
 {
   "name": "Hello, World!",
   "version": "1.0",
-  "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
-  "action": {}
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*"
+      ],
+      "all_frames": true,
+      "js": ["contentScript.js"]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://chat.openai.com; object-src 'self'"
 }
