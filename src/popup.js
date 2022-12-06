@@ -14,8 +14,15 @@ async function handleFormSubmit(event) {
 
 async function downloadData() {
   chrome.storage.local.get("treeData2", function(items) {
-    message.textContent = "Downloading data!"
+    const filename = "chatgpt-records_" + Date.now() + ".json";
+    message.textContent = "Downloaded to " + filename;
     message.hidden = false;
+    const blob = new Blob([items["treeData2"]], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    chrome.downloads.download({
+      url: url,
+      filename: filename
+    });
   });
 }
 
