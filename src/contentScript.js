@@ -53,4 +53,4 @@ function showData() {
 
 }
 
-setInterval(updateData, 5000);
+setInterval(updateData, 10000);
