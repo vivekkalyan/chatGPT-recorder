@@ -9,14 +9,15 @@ function updateData() {
 }
 
 function updateTree(conversationTree, conversationTexts) {
+  if (conversationTexts.length == 0) {
+    return
+  }
   var firstText = conversationTexts.shift();
   if (!conversationTree.map(x => x.value).includes(firstText)) {
     conversationTree.push({"value": firstText, "children": []});
   }
   var conversationBranch = conversationTree.filter(x => x.value == firstText)[0]["children"];
-  if (conversationTexts.length > 0) {
-    updateTree(conversationBranch, conversationTexts);
-  }
+  updateTree(conversationBranch, conversationTexts);
 }
 
 function showData() {
