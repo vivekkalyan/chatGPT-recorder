@@ -25,10 +25,10 @@ function updateData() {
       conversationTexts.push(conversationParas.join("\n\n"))
     }
   }
-  chrome.storage.local.get("treeData2", function(items) {
-    conversationTree = JSON.parse(items["treeData2"] || JSON.stringify([]));
+  chrome.storage.local.get("treeData", function(items) {
+    conversationTree = JSON.parse(items["treeData"] || JSON.stringify([]));
     updateTree(conversationTree, conversationTexts);
-    chrome.storage.local.set({ "treeData2": JSON.stringify(conversationTree) }, function () {
+    chrome.storage.local.set({ "treeData": JSON.stringify(conversationTree) }, function () {
       // console.log("Value set to: " + JSON.stringify(conversationTree));
     });
   });
