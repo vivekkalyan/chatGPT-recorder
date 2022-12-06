@@ -1,6 +1,6 @@
 function updateData() {
   var divs = Array.from(document.getElementsByTagName("div"))
-  var conversationItems = divs.filter(div => Array.from(div.classList).some(cls => cls.includes("ConversationItem__Message")))
+  var conversationItems = divs.filter(div => Array.from(div.classList).some(cls => cls.includes("text-base")))
   var conversationText = conversationItems.map(item => item.innerText)
   var conversationTextStr = JSON.stringify(conversationText)
   chrome.storage.local.set({ "data": conversationTextStr }, function () {
