@@ -1,7 +1,7 @@
 {
   "name": "chatGPT-recorder",
   "version": "1.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "content_scripts": [
     {
       "matches": [
@@ -13,6 +13,5 @@
   ],
   "permissions": [
     "storage"
-  ],
-  "content_security_policy": "script-src 'self' https://chat.openai.com; object-src 'self'"
+  ]
 }
