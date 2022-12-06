@@ -1,10 +1,14 @@
 function updateData() {
   var divs = Array.from(document.getElementsByTagName("div"))
   var conversationItems = divs.filter(div => Array.from(div.classList).some(cls => cls.includes("text-base")))
-  var conversationText = conversationItems.map(item => item.innerText)
-  var conversationTextStr = JSON.stringify(conversationText)
-  chrome.storage.local.set({ "data": conversationTextStr }, function () {
-    console.log("Value is set to: " + conversationTextStr);
+  var conversationTexts = conversationItems.map(item => item.innerText)
+  console.log(conversationTexts);
+  chrome.storage.local.get("treeData2", function(items) {
+    conversationTree = JSON.parse(items["treeData2"] || JSON.stringify([]));
+    updateTree(conversationTree, conversationTexts);
+    chrome.storage.local.set({ "treeData2": JSON.stringify(conversationTree) }, function () {
+      console.log("Value set to: " + JSON.stringify(conversationTree));
+    });
   });
 }
 
@@ -28,4 +32,3 @@ function showData() {
 }
 
 setInterval(updateData, 5000);
-setInterval(showData, 10000);
