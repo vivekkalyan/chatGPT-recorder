@@ -3,7 +3,6 @@ function updateData() {
   var conversationItems = divs.filter(div => Array.from(div.classList).some(cls => cls.includes("text-base")))
   let conversationTexts = [];
   for (const conversationItem of conversationItems) {
-    console.log(conversationItem)
     const para_code_blocks = conversationItem.querySelectorAll(["p", "pre"]);
     if (para_code_blocks.length == 0) {
       // questions
@@ -12,7 +11,6 @@ function updateData() {
       //answers
       conversationParas = [];
       for (const block of para_code_blocks) {
-        console.log(block.tagName)
         if (block.tagName == "P") {
           let text = block.innerHTML;
           text = text.replace(/<\/?code>/g, "`");
@@ -24,16 +22,14 @@ function updateData() {
           conversationParas.push(text);
         }
       }
-      console.log(conversationParas);
       conversationTexts.push(conversationParas.join("\n\n"))
     }
   }
-  console.log(conversationTexts);
   chrome.storage.local.get("treeData2", function(items) {
     conversationTree = JSON.parse(items["treeData2"] || JSON.stringify([]));
     updateTree(conversationTree, conversationTexts);
     chrome.storage.local.set({ "treeData2": JSON.stringify(conversationTree) }, function () {
-      console.log("Value set to: " + JSON.stringify(conversationTree));
+      // console.log("Value set to: " + JSON.stringify(conversationTree));
     });
   });
 }
